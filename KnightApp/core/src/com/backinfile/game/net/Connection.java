@@ -32,6 +32,10 @@ public class Connection {
 		return reciveList.poll();
 	}
 
+	public ConcurrentLinkedQueue<GameMessage> getReciveList() {
+		return reciveList;
+	}
+
 	public void sendGameMessage(GameMessage gameMessage) {
 		sendList.add(gameMessage);
 	}

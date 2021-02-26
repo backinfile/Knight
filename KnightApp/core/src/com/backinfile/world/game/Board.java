@@ -16,23 +16,8 @@ public class Board {
 
 	public final ActionManager actionManager = new ActionManager();
 
-	public Player getOpponent(Player player) {
-		if (player == players[0]) {
-			return players[1];
-		}
-		return players[0];
-	}
+	public Board() {
 
-	public int getCardId() {
-		return idCounter++;
-	}
-
-	public Player getCurActionPlayer() {
-		return actionManager.getCurAction().getPlayer();
-	}
-
-	public Player getCurTurnPlayer() {
-		return curTurnPlayer;
 	}
 
 	public void init() {
@@ -56,4 +41,24 @@ public class Board {
 			}
 		}
 	}
+
+	public Player getOpponent(Player player) {
+		if (player == players[0]) {
+			return players[1];
+		}
+		return players[0];
+	}
+
+	public int getCardId() {
+		return idCounter++;
+	}
+
+	public Player getCurActionPlayer() {
+		return actionManager.getCurAction().getPlayer();
+	}
+
+	public Player getCurTurnPlayer() {
+		return curTurnPlayer;
+	}
+
 }
