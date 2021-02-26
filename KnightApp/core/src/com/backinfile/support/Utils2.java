@@ -8,7 +8,6 @@ import java.util.Random;
 public class Utils2 {
 
 	public static final String UTF8 = "utf-8";
-	public static final Random random = new Random();
 
 	public static String getClassPath() {
 		return Utils2.class.getClassLoader().getResource("").getPath();
@@ -57,12 +56,19 @@ public class Utils2 {
 		return "";
 	}
 
-	public static float rand(float from, float to) {
-		return ((float) random.nextDouble()) * (to - from) + from;
+	public static int bytes2Int(byte[] bytes, int offset) {
+		int num = 0;
+		for (int i = offset; i < offset + 4; i++) {
+			num <<= 8;
+			num |= (bytes[i] & 0xFF);
+		}
+		return num;
 	}
 
-	public static double rand() {
-		return random.nextDouble();
+	public static void int2bytes(int num, byte[] bytes, int offset) {
+		for (int i = 0; i < 4; i++) {
+			bytes[offset + i] = (byte) (num >>> (24 - i * 8));
+		}
 	}
 
 }

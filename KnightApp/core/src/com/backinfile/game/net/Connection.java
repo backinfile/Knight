@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import com.backinfile.core.GameMessage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.net.Socket;
 

@@ -4,6 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.backinfile.core.DispatchThreads;
+import com.backinfile.core.GameMessage;
 import com.backinfile.core.Log;
 import com.backinfile.support.Utils2;
 

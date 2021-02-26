@@ -12,6 +12,8 @@ public class GameStartup extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+		GameMessage.collectAllMessage();
+
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 	}

@@ -1,6 +1,6 @@
 package com.backinfile.world.room;
 
-import com.backinfile.game.net.GameMessage;
+import com.backinfile.core.GameMessage;
 import com.backinfile.support.MsgHandler;
 
 public class RoomMessageHandler {
