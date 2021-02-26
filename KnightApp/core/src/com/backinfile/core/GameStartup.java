@@ -1,6 +1,7 @@
 package com.backinfile.core;
 
 import com.backinfile.event.RoomEvent;
+import com.backinfile.game.net.GameServer;
 import com.backinfile.gen.pb.Msg.CSConnect;
 import com.backinfile.gen.pb.Msg.SCConnect;
 import com.badlogic.gdx.Game;
@@ -13,10 +14,14 @@ public class GameStartup extends Game {
 	SpriteBatch batch;
 	Texture img;
 
+	public GameServer gameServer;
+
 	@Override
 	public void create() {
 		GameMessage.collectAllMessage();
 		RoomEvent.collectEventListener();
+		gameServer = new GameServer();
+		gameServer.start();
 
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
@@ -37,5 +42,7 @@ public class GameStartup extends Game {
 		super.dispose();
 		batch.dispose();
 		img.dispose();
+
+		gameServer.close();
 	}
 }

@@ -18,14 +18,19 @@ public class Connection {
 	private InputStream inputStream;
 	private OutputStream outputStream;
 
-	public final String name;
+	public String name;
+	public long id;
 
 	private final byte[] readBytes = new byte[1024];
 
-	public Connection(Socket socket, String name) {
+	public Connection(long id, Socket socket) {
 		this.socket = socket;
 		this.inputStream = socket.getInputStream();
 		this.outputStream = socket.getOutputStream();
+		this.id = id;
+	}
+
+	public void setName(String name) {
 		this.name = name;
 	}
 

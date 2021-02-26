@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.backinfile.support.ReflectionUtils;
+import com.backinfile.support.Time2;
 import com.backinfile.support.Utils2;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
@@ -14,9 +15,14 @@ public class GameMessage {
 	private Message message;
 	private static final byte[] contentBytes = new byte[1024];
 	private int length;
+	private long createTime;
 
 	private GameMessage() {
+		createTime = Time2.getCurrentTimestamp();
+	}
 
+	public long getCreateTime() {
+		return createTime;
 	}
 
 	public Message getMessage() {

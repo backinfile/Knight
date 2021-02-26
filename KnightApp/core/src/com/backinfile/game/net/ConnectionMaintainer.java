@@ -11,9 +11,9 @@ import com.backinfile.support.Utils2;
 public class ConnectionMaintainer {
 	private final ConcurrentLinkedQueue<Connection> waitForRun = new ConcurrentLinkedQueue<>();
 	private final ConcurrentLinkedQueue<Connection> waitForReschedule = new ConcurrentLinkedQueue<>();
-	private final ConcurrentHashMap<String, Connection> allConnections = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<Long, Connection> allConnections = new ConcurrentHashMap<>();
 
-	private final ConcurrentHashMap<String, ConcurrentLinkedQueue<GameMessage>> clientMessages = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<Long, ConcurrentLinkedQueue<GameMessage>> clientMessages = new ConcurrentHashMap<>();
 
 	private DispatchThreads dispatchThreads;
 	private static final int DEFAULT_THREAD_NUM = 4;
@@ -29,18 +29,14 @@ public class ConnectionMaintainer {
 	}
 
 	public void abort() {
-		Log.core.info("node 中断中.....");
+		Log.core.info("ConnectionMaintainer中断中。。。");
 		dispatchThreads.abortSync();
-		Log.core.info("node 中断结束");
+		Log.core.info("ConnectionMaintainer中断");
 	}
 
 	public void addConnnect(Connection connection) {
 		waitForRun.add(connection);
-		allConnections.put(connection.name, connection);
-	}
-
-	public boolean isConnectExist(String connectionName) {
-		return allConnections.contains(connectionName);
+		allConnections.put(connection.id, connection);
 	}
 
 	private void dispatchRun() {
@@ -60,7 +56,7 @@ public class ConnectionMaintainer {
 
 			collectMessage(connection);
 		} else {
-			allConnections.remove(connection.name);
+			allConnections.remove(connection.id);
 		}
 
 	}
@@ -71,8 +67,8 @@ public class ConnectionMaintainer {
 			while (!reciveList.isEmpty()) {
 				GameMessage gameMessage = reciveList.poll();
 				if (gameMessage != null) {
-					clientMessages.putIfAbsent(connection.name, new ConcurrentLinkedQueue<>());
-					ConcurrentLinkedQueue<GameMessage> queue = clientMessages.get(connection.name);
+					clientMessages.putIfAbsent(connection.id, new ConcurrentLinkedQueue<>());
+					ConcurrentLinkedQueue<GameMessage> queue = clientMessages.get(connection.id);
 					if (queue != null) {
 						queue.add(gameMessage);
 					} else {
@@ -95,12 +91,12 @@ public class ConnectionMaintainer {
 		}
 	}
 
-	public GameMessage pollGameMessage(String clientName) {
-		ConcurrentLinkedQueue<GameMessage> queue = clientMessages.get(clientName);
+	public GameMessage pollGameMessage(long id) {
+		ConcurrentLinkedQueue<GameMessage> queue = clientMessages.get(id);
 		if (queue != null) {
 			GameMessage gameMessage = queue.poll();
-			if (queue.isEmpty() && !allConnections.contains(clientName)) {
-				clientMessages.remove(clientName);
+			if (queue.isEmpty() && !allConnections.contains(id)) {
+				clientMessages.remove(id);
 			}
 			return gameMessage;
 		}

@@ -7,4 +7,6 @@ public class Log {
 	public static final Logger core = new Logger("core");
 	public static final Logger net = new Logger("net");
 	public static final Logger event = new Logger("event");
+	public static final Logger server = new Logger("server");
+	public static final Logger client = new Logger("client");
 }
