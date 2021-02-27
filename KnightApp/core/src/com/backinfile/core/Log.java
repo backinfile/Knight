@@ -1,6 +1,6 @@
 package com.backinfile.core;
 
-import com.backinfile.support.Logger;
+import com.backinfile.log.Logger;
 
 public class Log {
 	public static final Logger game = new Logger("game");

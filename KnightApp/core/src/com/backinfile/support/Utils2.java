@@ -3,7 +3,11 @@ package com.backinfile.support;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Random;
+import java.util.StringJoiner;
 
 public class Utils2 {
 
@@ -63,6 +67,13 @@ public class Utils2 {
 			num |= (bytes[i] & 0xFF);
 		}
 		return num;
+	}
+
+	public static String getStackTraceAsString(Throwable throwable) {
+		StringWriter stringWriter = new StringWriter();
+		throwable.printStackTrace(new PrintWriter(stringWriter, false));
+		stringWriter.flush();
+		return stringWriter.getBuffer().toString();
 	}
 
 	public static void int2bytes(int num, byte[] bytes, int offset) {

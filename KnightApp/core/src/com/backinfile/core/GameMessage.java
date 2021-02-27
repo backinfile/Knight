@@ -21,6 +21,15 @@ public class GameMessage {
 		createTime = Time2.getCurrentTimestamp();
 	}
 
+	public GameMessage(Message message) {
+		this();
+		this.message = message;
+	}
+
+	public GameMessage(Message.Builder builder) {
+		this(builder.build());
+	}
+
 	public long getCreateTime() {
 		return createTime;
 	}
@@ -34,6 +43,7 @@ public class GameMessage {
 	 */
 	public byte[] getBytes() {
 		byte[] byteArray = message.toByteArray();
+		length = byteArray.length + 8;
 		Utils2.int2bytes(byteArray.length + 8, contentBytes, 0);
 		Utils2.int2bytes(message.getClass().getName().hashCode(), contentBytes, 4);
 		System.arraycopy(byteArray, 0, contentBytes, 8, byteArray.length);
@@ -58,7 +68,7 @@ public class GameMessage {
 				gameMessage.message = builder.build();
 				return gameMessage;
 			} catch (InvalidProtocolBufferException e) {
-				Log.core.error("decode game message failed class=" + builder.getClass().getName(), e);
+				Log.core.error("decode game message failed class={0}", e, builder.getClass().getName());
 			}
 		}
 

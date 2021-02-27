@@ -1,8 +1,8 @@
 package com.backinfile.game.net;
 
+import com.backinfile.core.Const;
 import com.backinfile.core.Log;
-import com.backinfile.support.Utils2;
-import com.backinfile.world.room.Room;
+import com.backinfile.core.SysException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.net.ServerSocket;
@@ -15,50 +15,78 @@ public class GameServer {
 	private ServerSocket serverSocket;
 	// 维护客户端连接
 	private ConnectionMaintainer connectionMaintainer;
-	private volatile boolean abort = false;
 
-	private long connectionIdMax = 0;
+	private volatile long connectionIdMax = 0;
+	private volatile boolean isAlive = false; // 设置为false进行开始关闭过程
+	private boolean closed = false; // 真正关闭
 
 	public GameServer() {
 
 	}
 
 	public void start() {
-		serverSocket = Gdx.net.newServerSocket(Protocol.TCP, 9660, null);
+		Log.game.info("GameServer start");
+		Log.game.error("GameServer start", new SysException());
+		try {
+			serverSocket = Gdx.net.newServerSocket(Protocol.TCP, Const.GAMESERVER_PORT, null);
+		} catch (Exception e) {
+			isAlive = false;
+			return;
+		}
 		connectionMaintainer = new ConnectionMaintainer();
 		connectionMaintainer.startUp();
 		serverThread = new Thread(this::run);
 		serverThread.setDaemon(true);
 		serverThread.start();
+
+		isAlive = true;
+		closed = false;
+		connectionIdMax = 0;
 	}
 
 	public void run() {
 		SocketHints hints = new SocketHints();
-		hints.socketTimeout = 1;
-		while (!abort) {
-			Log.game.info("loop");
+		while (isAlive) {
 			pulse();
-			Socket socket = serverSocket.accept(hints);
+			Socket socket;
+			try {
+				socket = serverSocket.accept(hints);
+			} catch (Exception e) {
+				continue;
+			}
 			if (socket != null) {
 				connectionMaintainer.addConnnect(new Connection(connectionIdMax++, socket));
+				Log.game.info("new connection addr:{0}", socket.getRemoteAddress());
 			}
 		}
 	}
 
-	private void pulse() {
-
+	public void pulse() {
+		if (!isAlive && !closed) {
+			closed = true;
+			if (connectionMaintainer != null) {
+				connectionMaintainer.abort();
+			}
+			if (serverSocket != null) {
+				serverSocket.dispose();
+				try {
+					serverThread.join();
+				} catch (InterruptedException e) {
+					Log.game.error("error on GameServer close", e);
+				}
+				serverSocket = null;
+				serverThread = null;
+			}
+			Log.game.info("GameServer closed");
+		}
 	}
 
 	public void close() {
-		Log.game.info("GameServer关闭中。。。");
-		connectionMaintainer.abort();
-		abort = true;
-		try {
-			serverThread.join();
-		} catch (InterruptedException e) {
-			Log.game.error("error on GameServer close", e);
-		}
-		serverSocket.dispose();
-		Log.game.info("GameServer关闭");
+		Log.game.info("GameServer closing");
+		isAlive = false;
+	}
+
+	public boolean isAlive() {
+		return isAlive;
 	}
 }

@@ -29,9 +29,9 @@ public class ConnectionMaintainer {
 	}
 
 	public void abort() {
-		Log.core.info("ConnectionMaintainer中断中。。。");
+		Log.core.info("ConnectionMaintainer closing...");
 		dispatchThreads.abortSync();
-		Log.core.info("ConnectionMaintainer中断");
+		Log.core.info("ConnectionMaintainer closed");
 	}
 
 	public void addConnnect(Connection connection) {
@@ -72,8 +72,8 @@ public class ConnectionMaintainer {
 					if (queue != null) {
 						queue.add(gameMessage);
 					} else {
-						Log.core.error("ignore gameMessage name=" + connection.name + " gameMessage ="
-								+ gameMessage.toString());
+						Log.core.error("ignore gameMessage name={0} gameMessage ={1}", connection.name,
+								gameMessage.toString());
 					}
 				}
 			}
