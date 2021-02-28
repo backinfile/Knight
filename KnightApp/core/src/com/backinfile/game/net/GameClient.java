@@ -114,4 +114,8 @@ public class GameClient {
 		return connection;
 	}
 
+	public void close() {
+		isAlive = false;
+	}
+
 }
