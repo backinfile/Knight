@@ -1,11 +1,12 @@
 package com.backinfile.core;
 
-import com.backinfile.client.ImageManager;
+import com.backinfile.client.ResourceManager;
 import com.backinfile.client.screen.TestScreen;
 import com.backinfile.event.RoomEvent;
 import com.backinfile.game.net.GameClient;
 import com.backinfile.game.net.GameServer;
 import com.backinfile.gen.pb.Msg.SCConnect;
+import com.backinfile.log.Logger;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,11 +15,14 @@ public class GameStartup extends Game {
 
 	@Override
 	public void create() {
+		Logger.initLogFile();
 		GameMessage.collectAllMessage();
 		RoomEvent.collectEventListener();
-		ImageManager.init();
+		ResourceManager.init();
 
-		setScreen(new TestScreen());
+		TestScreen testScreen = new TestScreen();
+		testScreen.init();
+		setScreen(testScreen);
 	}
 
 	@Override

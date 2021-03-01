@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
-public class TestScreen extends ScreenAdapter {
+public class TestScreen extends BaseScreen {
 	public GameServer gameServer;
 	public GameClient gameClient;
 
@@ -18,7 +18,7 @@ public class TestScreen extends ScreenAdapter {
 	private TestStage testStage;
 
 	@Override
-	public void show() {
+	public void init() {
 		gameServer = new GameServer();
 		gameServer.start();
 
@@ -27,6 +27,10 @@ public class TestScreen extends ScreenAdapter {
 		gameClient.start();
 
 		testStage = new TestStage(new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getWidth()));
+		Gdx.input.setInputProcessor(testStage);
+		testStage.init();
+
+		super.init();
 	}
 
 	@Override
@@ -47,15 +51,8 @@ public class TestScreen extends ScreenAdapter {
 
 		testStage.act();
 		testStage.draw();
-	}
 
-	@Override
-	public void resize(int width, int height) {
-		testStage.getViewport().update(width, height);
-	}
-
-	@Override
-	public void hide() {
+		super.render(delta);
 	}
 
 	@Override
@@ -66,5 +63,11 @@ public class TestScreen extends ScreenAdapter {
 		}
 
 		testStage.dispose();
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		testStage.getViewport().update(width, height);
+		super.resize(width, height);
 	}
 }

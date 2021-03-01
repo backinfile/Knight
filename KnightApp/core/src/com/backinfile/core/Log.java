@@ -9,4 +9,5 @@ public class Log {
 	public static final Logger event = new Logger("event");
 	public static final Logger server = new Logger("server");
 	public static final Logger client = new Logger("client");
+	public static final Logger test = new Logger("test");
 }

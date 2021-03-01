@@ -96,7 +96,7 @@ public class Logger {
 	private static FileWriter fileWriter;
 	private static boolean logFileInited = false;
 
-	private static void initLogFile() {
+	public static void initLogFile() {
 		if (logFileInited) {
 			return;
 		} else {
@@ -123,8 +123,6 @@ public class Logger {
 	}
 
 	private static void log2File(String content) {
-		initLogFile();
-
 		if (fileWriter != null) {
 			try {
 				fileWriter.append(content + "\n");
