@@ -43,10 +43,11 @@ public class TestScreen extends BaseScreen {
 			gameClient.pulse();
 		}
 
-		if (cnt++ == 300) {
-			if (gameClient != null) {
-				gameClient.getConnection().sendGameMessage(new GameMessage(SCConnect.newBuilder().build()));
-			}
+		if (cnt++ == 200) {
+//			if (gameClient != null) {
+//				gameClient.getConnection().sendGameMessage(new GameMessage(SCConnect.newBuilder().build()));
+//			}
+			confirm("hahhah", null);
 		}
 
 		testStage.act();

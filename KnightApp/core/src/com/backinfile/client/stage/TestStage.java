@@ -16,9 +16,11 @@ public class TestStage extends BaseStage {
 
 	@Override
 	public void init() {
-		actor = new Image(ResourceManager.Chap1Heros.getTexture(2, 0));
+		actor = new Image(ResourceManager.CardFrontStore);
+		actor.setX(getWidth() / 2 - actor.getWidth() / 2);
+		actor.setY(getHeight() / 2 - actor.getHeight() / 2);
 		addActor(actor);
-		Log.test.info("show image Chap1 Heros, 2, 0");
+		Log.test.info("show image");
 	}
 
 	@Override

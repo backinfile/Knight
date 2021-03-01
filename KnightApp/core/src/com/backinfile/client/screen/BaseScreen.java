@@ -31,6 +31,10 @@ public abstract class BaseScreen extends ScreenAdapter {
 		confirmStage.show(this, text, callback);
 	}
 
+	public void confirm(String text) {
+		confirmStage.show(this, text, null);
+	}
+
 	@Override
 	public void resize(int width, int height) {
 		if (confirmStage.isActive()) {

@@ -10,16 +10,27 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class ResourceManager {
+
+	// ========图片
 	public static GridTexture Chap1Heros;
-	public static BitmapFont DefaultFont;
+	public static TextureRegion CardBorder;
+	public static TextureRegion CardFrontOccupy;
+	public static TextureRegion CardFrontStore;
+
 	public static TextureRegion DefaultButtonUp;
 	public static TextureRegion DefaultButtonDown;
+
+	// ======字体
+	public static BitmapFont DefaultFont;
 
 	public static void init() {
 		Log.game.info("start loading resource...");
 
+		// ========图片
 		Chap1Heros = new GridTexture("card/chap1/hero.png", 7, 2);
-		DefaultFont = new BitmapFont(Gdx.files.internal("font/sarasa/sarasa.fnt"), false);
+		CardBorder = new TextureRegion(new Texture(Gdx.files.internal("card/tools/border.png")));
+		CardFrontStore = new TextureRegion(new Texture(Gdx.files.internal("card/tools/store.png")));
+		CardFrontOccupy = new TextureRegion(new Texture(Gdx.files.internal("card/tools/occupy.png")));
 
 		Pixmap up = new Pixmap(10, 10, Format.RGBA8888);
 		up.setColor(Color.LIGHT_GRAY);
@@ -33,6 +44,8 @@ public class ResourceManager {
 		DefaultButtonDown = new TextureRegion(new Texture(down));
 		down.dispose();
 
+		// ======字体
+		DefaultFont = new BitmapFont(Gdx.files.internal("font/sarasa/sarasa.fnt"), false);
 		Log.game.info("resource loading complete");
 	}
 

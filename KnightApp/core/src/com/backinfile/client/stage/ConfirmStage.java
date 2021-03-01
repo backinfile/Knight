@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 
 public class ConfirmStage extends BaseStage {
 	private BaseScreen baseScreen;
@@ -41,6 +42,7 @@ public class ConfirmStage extends BaseStage {
 	@Override
 	public void init() {
 		label = new Label("null", new LabelStyle(ResourceManager.DefaultFont, null));
+		label.setAlignment(Align.center);
 
 		TextButtonStyle textButtonStyle = new TextButtonStyle();
 		textButtonStyle.font = ResourceManager.DefaultFont;
