@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import com.backinfile.core.Const;
-import com.backinfile.core.GameStartup;
 import com.backinfile.core.Log;
+import com.backinfile.seam.GameStartup;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Graphics.DisplayMode;

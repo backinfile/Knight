@@ -19,6 +19,10 @@ public class ResourceManager {
 
 	public static TextureRegion DefaultButtonUp;
 	public static TextureRegion DefaultButtonDown;
+	public static TextureRegion ZeroAlphaTexture;
+
+	public static TextureRegion AlphaMask;
+	public static TextureRegion White;
 
 	// ======字体
 	public static BitmapFont DefaultFont;
@@ -32,18 +36,11 @@ public class ResourceManager {
 		CardFrontStore = new TextureRegion(new Texture(Gdx.files.internal("card/tools/store.png")));
 		CardFrontOccupy = new TextureRegion(new Texture(Gdx.files.internal("card/tools/occupy.png")));
 
-		Pixmap up = new Pixmap(10, 10, Format.RGBA8888);
-		up.setColor(Color.LIGHT_GRAY);
-		up.fill();
-		DefaultButtonUp = new TextureRegion(new Texture(up));
-		up.dispose();
-
-		Pixmap down = new Pixmap(10, 10, Format.RGBA8888);
-		down.setColor(Color.LIGHT_GRAY);
-		down.fill();
-		DefaultButtonDown = new TextureRegion(new Texture(down));
-		down.dispose();
-
+		DefaultButtonUp = newColorTexture(Color.DARK_GRAY);
+		DefaultButtonDown = newColorTexture(Color.LIGHT_GRAY);
+		ZeroAlphaTexture = newColorTexture(Color.CLEAR);
+		AlphaMask = newColorTexture(new Color(0, 0, 0, 0.95f));
+		White = newColorTexture(Color.WHITE);
 		// ======字体
 		DefaultFont = new BitmapFont(Gdx.files.internal("font/sarasa/sarasa.fnt"), false);
 		Log.game.info("resource loading complete");
@@ -51,5 +48,19 @@ public class ResourceManager {
 
 	public static void dispose() {
 
+	}
+
+	public static TextureRegion newColorTexture(Color color) {
+		return newColorTexture(8, 8, color);
+
+	}
+
+	public static TextureRegion newColorTexture(int width, int height, Color color) {
+		Pixmap pixmap = new Pixmap(width, height, Format.RGBA8888);
+		pixmap.setColor(color);
+		pixmap.fill();
+		TextureRegion texture = new TextureRegion(new Texture(pixmap));
+		pixmap.dispose();
+		return texture;
 	}
 }

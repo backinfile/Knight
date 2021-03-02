@@ -3,6 +3,7 @@ package com.backinfile.client.stage;
 import java.util.function.Consumer;
 
 import com.backinfile.client.ResourceManager;
+import com.backinfile.client.actor.LineButton;
 import com.backinfile.client.screen.BaseScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -23,7 +25,8 @@ public class ConfirmStage extends BaseStage {
 	private BaseScreen baseScreen;
 	private InputProcessor oldInputProcessor;
 	private Label label;
-	private TextButton confirm;
+	private LineButton confirm;
+	private Image alphaMask;
 	private Group group;
 	private Consumer<BaseScreen> callback = null;
 
@@ -44,18 +47,17 @@ public class ConfirmStage extends BaseStage {
 		label = new Label("null", new LabelStyle(ResourceManager.DefaultFont, null));
 		label.setAlignment(Align.center);
 
-		TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.font = ResourceManager.DefaultFont;
-		textButtonStyle.up = new TextureRegionDrawable(ResourceManager.DefaultButtonUp);
-		textButtonStyle.down = new TextureRegionDrawable(ResourceManager.DefaultButtonDown);
-		confirm = new TextButton("确认", textButtonStyle);
+		confirm = new LineButton("确认");
+
+		alphaMask = new Image(ResourceManager.AlphaMask);
 
 		group = new Group();
+		group.addActor(alphaMask);
 		group.addActor(confirm);
 		group.addActor(label);
 		addActor(group);
 
-		group.addListener(new ConfirmStageClickListener());
+		confirm.addListener(new ConfirmStageClickListener());
 	}
 
 	public void show(BaseScreen screen, String text, Consumer<BaseScreen> callback) {
@@ -68,10 +70,13 @@ public class ConfirmStage extends BaseStage {
 
 		label.setText(text);
 		label.setX(getWidth() / 2 - label.getWidth() / 2);
-		label.setY(getHeight() / 2 - label.getHeight() / 2 + 100);
+		label.setY(getHeight() / 2 - label.getHeight() / 2 + 30);
 
 		confirm.setX(getWidth() / 2 - label.getWidth() / 2);
 		confirm.setY(getHeight() / 2 - label.getHeight() / 2 - 100);
+
+		alphaMask.setPosition(0, 0);
+		alphaMask.setSize(getWidth(), getHeight());
 
 		this.callback = callback;
 

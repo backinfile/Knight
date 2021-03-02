@@ -3,9 +3,9 @@ package com.backinfile.client.screen;
 import com.backinfile.client.stage.TestStage;
 import com.backinfile.core.Const;
 import com.backinfile.core.GameMessage;
-import com.backinfile.game.net.GameClient;
-import com.backinfile.game.net.GameServer;
 import com.backinfile.gen.pb.Msg.SCConnect;
+import com.backinfile.seam.GameClient;
+import com.backinfile.seam.GameServer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -43,7 +43,7 @@ public class TestScreen extends BaseScreen {
 			gameClient.pulse();
 		}
 
-		if (cnt++ == 200) {
+		if (cnt++ == 50) {
 //			if (gameClient != null) {
 //				gameClient.getConnection().sendGameMessage(new GameMessage(SCConnect.newBuilder().build()));
 //			}
