@@ -4,6 +4,7 @@ import com.backinfile.client.ResourceManager;
 import com.backinfile.client.screen.TestScreen;
 import com.backinfile.core.GameMessage;
 import com.backinfile.core.Log;
+import com.backinfile.core.Settings;
 import com.backinfile.core.event.RoomEvent;
 import com.backinfile.core.log.Logger;
 import com.backinfile.gen.pb.Msg.SCConnect;
@@ -15,6 +16,7 @@ public class GameStartup extends Game {
 
 	@Override
 	public void create() {
+		Settings.Init();
 		Logger.initLogFile();
 		GameMessage.collectAllMessage();
 		RoomEvent.collectEventListener();

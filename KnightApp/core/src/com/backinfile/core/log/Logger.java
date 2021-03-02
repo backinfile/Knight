@@ -32,7 +32,7 @@ public class Logger {
 			message = MessageFormat.format(message, arguments);
 		}
 //		Gdx.app.log(tag, message);
-		if (LoggerLevel.INFO.isFit(Settings.LOGGER_LEVEL)) {
+		if (LoggerLevel.INFO.isFit(Settings.Instance.LOGGER_LEVEL)) {
 			append(LoggerLevel.INFO, message, null);
 		}
 	}
@@ -42,7 +42,7 @@ public class Logger {
 			message = MessageFormat.format(message, arguments);
 		}
 //		Gdx.app.debug(tag, message);
-		if (LoggerLevel.DEBUG.isFit(Settings.LOGGER_LEVEL)) {
+		if (LoggerLevel.DEBUG.isFit(Settings.Instance.LOGGER_LEVEL)) {
 			append(LoggerLevel.DEBUG, message, null);
 		}
 	}
@@ -52,7 +52,7 @@ public class Logger {
 			message = MessageFormat.format(message, arguments);
 		}
 //		Gdx.app.error(tag, message);
-		if (LoggerLevel.ERROR.isFit(Settings.LOGGER_LEVEL)) {
+		if (LoggerLevel.ERROR.isFit(Settings.Instance.LOGGER_LEVEL)) {
 			append(LoggerLevel.ERROR, message, null);
 		}
 	}
@@ -62,7 +62,7 @@ public class Logger {
 			message = MessageFormat.format(message, arguments);
 		}
 //		Gdx.app.error(tag, message, throwable);
-		if (LoggerLevel.ERROR.isFit(Settings.LOGGER_LEVEL)) {
+		if (LoggerLevel.ERROR.isFit(Settings.Instance.LOGGER_LEVEL)) {
 			append(LoggerLevel.ERROR, message, throwable);
 		}
 	}

@@ -1532,3 +1532,39 @@ com.backinfile.core.SysException
 2021-03-02 15:33:47.161 (TestStage.java:23) [TEST][INFO] show image
 2021-03-02 15:33:47.179 (GameClient.java:102) [GAME][INFO] connect server success addr:localhost/127.0.0.1:9660
 2021-03-02 15:33:52.498 (GameStartup.java:37) [GAME][INFO] game exit
+2021-03-02 16:43:32.561 (ResourceManager.java:31) [GAME][INFO] start loading resource...
+2021-03-02 16:43:32.826 (ResourceManager.java:46) [GAME][INFO] resource loading complete
+2021-03-02 16:43:32.826 (GameServer.java:30) [GAME][INFO] GameServer start
+2021-03-02 16:43:32.826 (GameServer.java:31) [GAME][ERROR] GameServer start
+com.backinfile.core.SysException
+	at com.backinfile.seam.GameServer.start(GameServer.java:31)
+	at com.backinfile.client.screen.TestScreen.init(TestScreen.java:23)
+	at com.backinfile.seam.GameStartup.create(GameStartup.java:26)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:150)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:127)
+
+2021-03-02 16:43:32.830 (GameClient.java:52) [GAME][INFO] GameClient start
+2021-03-02 16:43:32.831 (GameClient.java:66) [NET][INFO] connecting server..(the 1th times)
+2021-03-02 16:43:32.834 (GameClient.java:70) [NET][INFO] connect server success
+2021-03-02 16:43:32.835 (GameServer.java:61) [GAME][INFO] new connection addr:/127.0.0.1:58272
+2021-03-02 16:43:32.851 (TestStage.java:23) [TEST][INFO] show image
+2021-03-02 16:43:32.868 (GameClient.java:102) [GAME][INFO] connect server success addr:localhost/127.0.0.1:9660
+2021-03-02 16:43:39.261 (GameStartup.java:39) [GAME][INFO] game exit
+2021-03-02 17:23:25.768 (ResourceManager.java:31) [GAME][INFO] start loading resource...
+2021-03-02 17:23:26.032 (ResourceManager.java:46) [GAME][INFO] resource loading complete
+2021-03-02 17:23:26.032 (GameServer.java:30) [GAME][INFO] GameServer start
+2021-03-02 17:23:26.032 (GameServer.java:31) [GAME][ERROR] GameServer start
+com.backinfile.core.SysException
+	at com.backinfile.seam.GameServer.start(GameServer.java:31)
+	at com.backinfile.client.screen.TestScreen.init(TestScreen.java:23)
+	at com.backinfile.seam.GameStartup.create(GameStartup.java:26)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:150)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:127)
+
+2021-03-02 17:23:26.036 (GameClient.java:52) [GAME][INFO] GameClient start
+2021-03-02 17:23:26.037 (GameClient.java:66) [NET][INFO] connecting server..(the 1th times)
+2021-03-02 17:23:26.040 (GameClient.java:70) [NET][INFO] connect server success
+2021-03-02 17:23:26.041 (GameServer.java:61) [GAME][INFO] new connection addr:/127.0.0.1:62097
+2021-03-02 17:23:26.056 (TestStage.java:23) [TEST][INFO] show image
+2021-03-02 17:23:26.072 (GameClient.java:102) [GAME][INFO] connect server success addr:localhost/127.0.0.1:9660
+2021-03-02 17:23:27.007 (GameStartup.java:39) [GAME][INFO] game exit

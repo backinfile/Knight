@@ -1,6 +1,9 @@
 package com.backinfile.core;
 
 public class Const {
+	public static final String GAME_NAME = "Knight";
+	public static final String GAME_AUTHOR = "backinfile";
+
 	public static final String WINDOW_TITLE = "Knight";
 	public static final int WINDOW_WIDTH = 1280;
 	public static final int WINDOW_HEIGHT = 680;
